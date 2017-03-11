@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>618</width>
+    <height>528</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>656</width>
+    <height>554</height>
+   </size>
+  </property>
+  <property name="baseSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <weight>50</weight>
+    <italic>false</italic>
+    <bold>false</bold>
+    <underline>false</underline>
+   </font>
+  </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
+  </property>
+  <property name="acceptDrops">
+   <bool>false</bool>
+  </property>
+  <property name="windowTitle">
+   <string>Aurora Vision</string>
+  </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
+  </property>
+  <property name="animated">
+   <bool>true</bool>
+  </property>
+  <property name="documentMode">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="sizeConstraint">
+     <enum>QLayout::SetMaximumSize</enum>
+    </property>
+    <property name="leftMargin">
+     <number>9</number>
+    </property>
+    <property name="horizontalSpacing">
+     <number>5</number>
+    </property>
+    <property name="verticalSpacing">
+     <number>6</number>
+    </property>
+    <item row="1" column="0">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>420</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="0" column="0" colspan="2">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="configuration_tab">
+       <attribute name="title">
+        <string>Configuration</string>
+       </attribute>
+       <widget class="QLabel" name="logo_lable">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>561</width>
+          <height>281</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="layoutWidget0">
+        <property name="geometry">
+         <rect>
+          <x>11</x>
+          <y>310</y>
+          <width>561</width>
+          <height>78</height>
+         </rect>
+        </property>
+        <layout class="QFormLayout" name="formLayout">
+         <property name="formAlignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="horizontalSpacing">
+          <number>15</number>
+         </property>
+         <property name="verticalSpacing">
+          <number>6</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QPushButton" name="submit_pb">
+           <property name="text">
+            <string>       Submit       </string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="data_Adrs_lineEdit"/>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="indoor_tab">
+       <attribute name="title">
+        <string>Outdoor</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <widget class="QToolBox" name="toolBox">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="hsv_thr_tb">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>578</width>
+             <height>342</height>
+            </rect>
+           </property>
+           <attribute name="label">
+            <string>Indoor Thresholding</string>
+           </attribute>
+           <widget class="QLabel" name="set_on_label_indoor">
+            <property name="geometry">
+             <rect>
+              <x>70</x>
+              <y>20</y>
+              <width>51</width>
+              <height>17</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <italic>true</italic>
+             </font>
+            </property>
+            <property name="text">
+             <string>Set on:</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="item_lb_indoor">
+            <property name="geometry">
+             <rect>
+              <x>400</x>
+              <y>20</y>
+              <width>151</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+           <widget class="QLabel" name="set_state_label_indoor">
+            <property name="geometry">
+             <rect>
+              <x>130</x>
+              <y>20</y>
+              <width>241</width>
+              <height>17</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+           <widget class="QCheckBox" name="pre_cb_indoor">
+            <property name="geometry">
+             <rect>
+              <x>50</x>
+              <y>300</y>
+              <width>331</width>
+              <height>23</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Previw thresholding operation on HSV image</string>
+            </property>
+           </widget>
+           <widget class="QWidget" name="layoutWidget1">
+            <property name="geometry">
+             <rect>
+              <x>60</x>
+              <y>50</y>
+              <width>321</width>
+              <height>241</height>
+             </rect>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout">
+             <item>
+              <widget class="QSlider" name="h_low_s_indoor">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSlider" name="h_high_s_indoor">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSlider" name="s_low_s_indoor">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSlider" name="s_high_s_indoor">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSlider" name="v_low_s_indoor">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSlider" name="v_high_s_indoor">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="layoutWidget2">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>50</y>
+              <width>50</width>
+              <height>241</height>
+             </rect>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <item>
+              <widget class="QLabel" name="h_low_lb_indoor">
+               <property name="text">
+                <string>H Low</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="h_high_lb_indoor">
+               <property name="text">
+                <string>H High</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="s_low_lb_indoor">
+               <property name="text">
+                <string>S Low</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="s_high_lb_indoor">
+               <property name="text">
+                <string>S High</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="v_low_lb_indoor">
+               <property name="text">
+                <string>V low</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="v_high_lb_indoor">
+               <property name="text">
+                <string>V High</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="layoutWidget4">
+            <property name="geometry">
+             <rect>
+              <x>390</x>
+              <y>40</y>
+              <width>178</width>
+              <height>281</height>
+             </rect>
+            </property>
+            <layout class="QFormLayout" name="formLayout_2">
+             <item row="0" column="0" colspan="2">
+              <widget class="QLineEdit" name="lineEdit_indoor"/>
+             </item>
+             <item row="1" column="0" colspan="2">
+              <widget class="QListWidget" name="listWidget_indoor"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QPushButton" name="add_pb_indoor">
+               <property name="text">
+                <string>Add</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QPushButton" name="remove_pb_indoor">
+               <property name="text">
+                <string>Remove</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0" colspan="2">
+              <widget class="QPushButton" name="load_pb_indoor">
+               <property name="text">
+                <string>Load</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QPushButton" name="set_pb_indoor">
+               <property name="text">
+                <string>Set</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QPushButton" name="save_pb_indoor">
+               <property name="text">
+                <string>Save</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+          <widget class="QWidget" name="cam_tb">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>330</width>
+             <height>157</height>
+            </rect>
+           </property>
+           <attribute name="label">
+            <string>Indoor Shape and Camera</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_2">
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="triangle_cb">
+              <property name="text">
+               <string>Triangle</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QCheckBox" name="square_cb">
+              <property name="text">
+               <string>Square</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="pentagon_cb">
+              <property name="text">
+               <string>Pentagon</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QCheckBox" name="star_cb">
+              <property name="text">
+               <string>Star</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="circle_cb">
+              <property name="text">
+               <string>Circle</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="heart_cb">
+              <property name="text">
+               <string>Heart</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="chess_shape_cb">
+              <property name="text">
+               <string>Indoor landing shape</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QPushButton" name="open_cam_indoor">
+              <property name="text">
+               <string>Open Camera</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QPushButton" name="close_cam_indoor">
+              <property name="text">
+               <string>Close Camera</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QCheckBox" name="outdoor_cb">
+              <property name="text">
+               <string>Outdoor shape</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="outdoor_tab">
+       <attribute name="title">
+        <string>Indoor</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusBar">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>data_Adrs_lineEdit</tabstop>
+  <tabstop>submit_pb</tabstop>
+  <tabstop>lineEdit_indoor</tabstop>
+  <tabstop>add_pb_indoor</tabstop>
+  <tabstop>save_pb_indoor</tabstop>
+  <tabstop>set_pb_indoor</tabstop>
+  <tabstop>load_pb_indoor</tabstop>
+  <tabstop>remove_pb_indoor</tabstop>
+  <tabstop>s_low_s_indoor</tabstop>
+  <tabstop>s_high_s_indoor</tabstop>
+  <tabstop>v_low_s_indoor</tabstop>
+  <tabstop>v_high_s_indoor</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>listWidget_indoor</tabstop>
+  <tabstop>h_high_s_indoor</tabstop>
+  <tabstop>h_low_s_indoor</tabstop>
+  <tabstop>pre_cb_indoor</tabstop>
+  <tabstop>triangle_cb</tabstop>
+  <tabstop>square_cb</tabstop>
+  <tabstop>pentagon_cb</tabstop>
+  <tabstop>star_cb</tabstop>
+  <tabstop>circle_cb</tabstop>
+  <tabstop>heart_cb</tabstop>
+  <tabstop>chess_shape_cb</tabstop>
+  <tabstop>open_cam_indoor</tabstop>
+  <tabstop>close_cam_indoor</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
