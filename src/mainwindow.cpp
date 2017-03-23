@@ -298,7 +298,7 @@ void MainWindow::on_set_pb_indoor_clicked()
   {
     set_data();
 
-    //Set on labale
+    //Set on label
     Qname_item_indoor[c_set] = QString::fromStdString(data_indoor[currentRow].name_item);
     ui->set_state_label_indoor->setText(Qname_item_indoor[c_set]);
     ui->set_state_label_indoor->setStyleSheet("QLabel { color : blue; }");
@@ -307,7 +307,7 @@ void MainWindow::on_set_pb_indoor_clicked()
   else if (c_set == 1)
   {
     set_data();
-    //Set on labale
+    //Set on label
     Qname_item_indoor[c_set] = QString::fromStdString(data_indoor[currentRow].name_item);
     ui->set_state_label_indoor->setText(Qname_item_indoor[c_set - 1] + ", " + Qname_item_indoor[c_set]);
     ui->set_state_label_indoor->setStyleSheet("QLabel { color : blue; }");
