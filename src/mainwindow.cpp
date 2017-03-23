@@ -40,21 +40,13 @@ MainWindow::MainWindow(QWidget *parent) :
   it_(nh_)
 {
   ui->setupUi(this);
-  
+
   polygon = Polygon();
-  
+
   QPixmap logo(logo_addres);
   ui->logo_lable->setPixmap(logo);
   ui->data_Adrs_lineEdit->setText(indoor_file);
   ui->lineEdit_indoor->setPlaceholderText("Item Name"); //line edit plac
-
-  //set renge slider
-  ui->h_low_s_indoor->setRange(0, 179);
-  ui->h_high_s_indoor->setRange(0, 179);
-  ui->s_low_s_indoor->setRange(0, 255);
-  ui->s_high_s_indoor->setRange(0, 255);
-  ui->v_low_s_indoor->setRange(0, 255);
-  ui->v_high_s_indoor->setRange(0, 255);
 
   image_sub_ = it_.subscribe("/ardrone/bottom/image_raw", 1, &MainWindow::imageCb, this);
   image_pub_ = it_.advertise("/vision/image", 1);
@@ -412,7 +404,7 @@ void MainWindow::on_close_cam_indoor_clicked()
 
 void MainWindow::Thread::run()
 {
-  Mat org_img, thr_img[2], thr_img1, hsv_img;
+  Mat org_img, thr_img, thr_img1, hsv_img;
   cv_bridge::CvImage Cvptr;
   Cvptr.encoding = sensor_msgs::image_encodings::BGR8;
   namedWindow("Indoor Shape");
@@ -430,23 +422,22 @@ void MainWindow::Thread::run()
     }
     else
     {
-      hsv_thresholding(org_img, thr_img[0], &set_data_indoor[c_set]);
-      hsv_thresholding(org_img, thr_img[1], &set_data_indoor[c_set + 1]);
-
+      hsv_thresholding(org_img, thr_img, &set_data_indoor[c_set]);
+    
       if (triangle)
-        polygon.getTriangle().recognize(org_img, thr_img[0]);
+        polygon.getTriangle().recognize(org_img, thr_img);
 
       if (square)
-        polygon.getSquare().recognize(org_img, thr_img[0]);
+        polygon.getSquare().recognize(org_img, thr_img);
 
       if (circle1)
-        polygon.getCircle().recognize(org_img, thr_img[0]);
+        polygon.getCircle().recognize(org_img, thr_img);
 
       if (pentagon)
-        polygon.getPentagon().recognize(org_img, thr_img[0]);
+        polygon.getPentagon().recognize(org_img, thr_img);
 
       if (star)
-        polygon.getStar().recognize(org_img, thr_img[0]);
+        polygon.getStar().recognize(org_img, thr_img);
 
       if (heart)
         polygon.getHeart().recognize(org_img);
