@@ -54,6 +54,7 @@ private slots:
     void heart_cb(int);
     void chess_shape(int);
     void outdoor_cb(int);
+    void rviz_cb(int);
     void on_load_pb_indoor_clicked();
     void on_h_low_s_indoor_valueChanged(int value);
     void on_h_high_s_indoor_valueChanged(int value);
