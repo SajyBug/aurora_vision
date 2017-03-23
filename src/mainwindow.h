@@ -27,10 +27,7 @@ class MainWindow : public QMainWindow {
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    void set_data();
     void imageCb(const sensor_msgs::ImageConstPtr& msg);
-
-
     ~MainWindow();
 
     class Thread : public QThread {
@@ -45,7 +42,6 @@ private slots:
     void on_remove_pb_indoor_clicked();
     void on_listWidget_indoor_pressed(const QModelIndex &index);
     void on_save_pb_indoor_clicked();
-    void on_set_pb_indoor_clicked();
     void traingle_cb(int);
     void square_cb(int);
     void circle_cb(int);
@@ -72,8 +68,6 @@ private:
     ros::NodeHandle nh_;
     image_transport::ImageTransport it_;
     image_transport::Subscriber image_sub_;
-
-
     Thread thread;
 };
 
