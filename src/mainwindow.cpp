@@ -33,6 +33,7 @@ bool star = false;
 bool heart = false;
 bool chess_shape1 = false;
 bool outdoor = false;
+bool rviz = false;
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
@@ -58,6 +59,7 @@ MainWindow::MainWindow(QWidget *parent) :
   connect(ui->heart_cb, SIGNAL(stateChanged(int)), this, SLOT(heart_cb(int)));
   connect(ui->chess_shape_cb, SIGNAL(stateChanged(int)), this, SLOT(chess_shape(int)));
   connect(ui->outdoor_cb, SIGNAL(stateChanged(int)), this, SLOT(outdoor_cb(int)));
+  connect(ui->rviz_cb, SIGNAL(stateChanged(int)), this, SLOT(rviz_cb(int)));
 
 }
 
@@ -123,6 +125,14 @@ void MainWindow::outdoor_cb(int a)
     outdoor = true;
   else
     outdoor = false;
+}
+
+void MainWindow::rviz_cb(int a)
+{
+  if (a)
+    rviz = true;
+  else
+    rviz = false;
 }
 
 MainWindow::~MainWindow()
@@ -341,7 +351,7 @@ void MainWindow::on_load_pb_indoor_clicked()
 
   if (ui->listWidget_indoor->count() == 0) //when database is empty
   {
-    ui->item_lb_indoor->setText("Can not found data");
+    ui->item_lb_indoor->setText(" Data not found ");
     ui->item_lb_indoor->setStyleSheet("QLabel { color : red; }");
   }
 }
@@ -407,7 +417,6 @@ void MainWindow::Thread::run()
   Mat org_img, thr_img, thr_img1, hsv_img;
   cv_bridge::CvImage Cvptr;
   Cvptr.encoding = sensor_msgs::image_encodings::BGR8;
-  namedWindow("Indoor Shape");
   while (true)
   {
     org_img = original;
@@ -417,13 +426,15 @@ void MainWindow::Thread::run()
       cvtColor(org_img, hsv_img, CV_BGR2HSV); //Convert the captured frame from BGR to HSV
       inRange(hsv_img, Scalar(data_indoor[currentRow].h_low, data_indoor[currentRow].s_low, data_indoor[currentRow].v_low),
         Scalar(data_indoor[currentRow].h_high, data_indoor[currentRow].s_high, data_indoor[currentRow].v_high), thr_img1); //Threshold the image
-      imshow("Indoor Shape", thr_img1);
+
+      if (!rviz)
+        imshow("Outdoor Shape", thr_img1);
 
     }
     else
     {
       hsv_thresholding(org_img, thr_img, &set_data_indoor[c_set]);
-    
+
       if (triangle)
         polygon.getTriangle().recognize(org_img, thr_img);
 
@@ -448,11 +459,17 @@ void MainWindow::Thread::run()
       if (outdoor)
         polygon.getH_shape().recognize(org_img);
 
-      Cvptr.image = org_img;
-      image_pub_.publish(Cvptr.toImageMsg());
-
-      imshow("Indoor Shape", org_img);
+      if (!rviz)
+        imshow("Outdoor Shape", org_img);
     }
+    Cvptr.image = org_img;
+
+    if (rviz)
+    {
+      image_pub_.publish(Cvptr.toImageMsg());
+      destroyAllWindows();
+    }
+
     if (close_ > 0)
     {
       close_ = 0;
