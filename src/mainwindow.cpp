@@ -4,21 +4,16 @@
 #include "filter.h"
 #include "polygon.h"
 
-
 using namespace std;
 using namespace cv;
 
 set_on data_indoor[10]; //baraye preview && save data
-set_on set_data_indoor[2]; // set kardane data ro inrange asli
-
-int vc_number = -1;
 int currentRow = 0;
-int c_set = 0;
 unsigned int close_ = 0;
 
 QString logo_addres = ":/source/logo.png";
 QString indoor_file = "/home/sajjadtest/Desktop/indoor_file.txt";
-QString Qname_item_indoor[2];
+QString name_item_indoor;
 string line_data;
 Mat original;
 bool thershold = false;
@@ -60,6 +55,16 @@ MainWindow::MainWindow(QWidget *parent) :
   connect(ui->chess_shape_cb, SIGNAL(stateChanged(int)), this, SLOT(chess_shape(int)));
   connect(ui->outdoor_cb, SIGNAL(stateChanged(int)), this, SLOT(outdoor_cb(int)));
   connect(ui->rviz_cb, SIGNAL(stateChanged(int)), this, SLOT(rviz_cb(int)));
+  ui->set_state_label_indoor->setText("default");
+  ui->set_state_label_indoor->setStyleSheet("QLabel { color : blue; }");
+  data_indoor[0].name_item = "default";
+  data_indoor[0].h_low = 0;
+  data_indoor[0].h_high = 179;
+  data_indoor[0].s_low = 0;
+  data_indoor[0].s_high = 255;
+  data_indoor[0].v_low = 0;
+  data_indoor[0].v_high = 255;
+  data_indoor[0].item_row = 0;
 
 }
 
@@ -142,7 +147,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::imageCb(const sensor_msgs::ImageConstPtr& msg)
 {
-
   cv_bridge::CvImagePtr cv_ptr;
   try
   {
@@ -156,7 +160,6 @@ void MainWindow::imageCb(const sensor_msgs::ImageConstPtr& msg)
   original = cv_ptr->image;
   //  cv::imshow("original", original);
   cv::waitKey(3);
-
 }
 
 void MainWindow::on_submit_pb_clicked()
@@ -182,12 +185,12 @@ void MainWindow::on_add_pb_indoor_clicked()
   else
   {
     //Add new item
-    Qname_item_indoor[c_set] = ui->lineEdit_indoor->text();
-    ui->listWidget_indoor->addItem(Qname_item_indoor[c_set]);
+    name_item_indoor = ui->lineEdit_indoor->text();
+    ui->listWidget_indoor->addItem(name_item_indoor);
 
     currentRow = ui->listWidget_indoor->count() - 1;
     data_indoor[currentRow].item_row = currentRow;
-    data_indoor[currentRow].name_item = Qname_item_indoor[c_set].toStdString();
+    data_indoor[currentRow].name_item = name_item_indoor.toStdString();
     data_indoor[currentRow].h_low = ui->h_low_s_indoor->value();
     data_indoor[currentRow].h_high = ui->h_high_s_indoor->value();
     data_indoor[currentRow].s_low = ui->s_low_s_indoor->value();
@@ -245,6 +248,8 @@ void MainWindow::on_listWidget_indoor_pressed(const QModelIndex &index)
   ui->s_high_s_indoor->setValue(data_indoor[currentRow].s_high);
   ui->v_low_s_indoor->setValue(data_indoor[currentRow].v_low);
   ui->v_high_s_indoor->setValue(data_indoor[currentRow].v_high);
+  name_item_indoor = QString::fromStdString(data_indoor[currentRow].name_item);
+  ui->set_state_label_indoor->setText(name_item_indoor);
 }
 
 void MainWindow::on_save_pb_indoor_clicked()
@@ -282,41 +287,6 @@ void MainWindow::on_save_pb_indoor_clicked()
   on_listWidget_indoor_pressed(index_item);
 }
 
-void MainWindow::set_data()
-{
-  set_data_indoor[c_set].h_low = data_indoor[currentRow].h_low;
-  set_data_indoor[c_set].h_high = data_indoor[currentRow].h_high;
-  set_data_indoor[c_set].s_low = data_indoor[currentRow].s_low;
-  set_data_indoor[c_set].s_high = data_indoor[currentRow].s_high;
-  set_data_indoor[c_set].v_low = data_indoor[currentRow].v_low;
-  set_data_indoor[c_set].v_high = data_indoor[currentRow].v_high;
-  set_data_indoor[c_set].item_row = data_indoor[currentRow].item_row;
-  set_data_indoor[c_set].name_item = data_indoor[currentRow].name_item;
-}
-
-void MainWindow::on_set_pb_indoor_clicked()
-{
-  if (c_set == 0)
-  {
-    set_data();
-
-    //Set on label
-    Qname_item_indoor[c_set] = QString::fromStdString(data_indoor[currentRow].name_item);
-    ui->set_state_label_indoor->setText(Qname_item_indoor[c_set]);
-    ui->set_state_label_indoor->setStyleSheet("QLabel { color : blue; }");
-    c_set++;
-  }
-  else if (c_set == 1)
-  {
-    set_data();
-    //Set on label
-    Qname_item_indoor[c_set] = QString::fromStdString(data_indoor[currentRow].name_item);
-    ui->set_state_label_indoor->setText(Qname_item_indoor[c_set - 1] + ", " + Qname_item_indoor[c_set]);
-    ui->set_state_label_indoor->setStyleSheet("QLabel { color : blue; }");
-    c_set = 0;
-  }
-}
-
 void MainWindow::on_load_pb_indoor_clicked()
 {
   fstream file;
@@ -330,6 +300,7 @@ void MainWindow::on_load_pb_indoor_clicked()
   if (c_line != 0) // agar data dashtim
   {
     file.open(indoor_file.toStdString().c_str()); //load database
+    ui->listWidget_indoor->clear();
     for (currentRow = 0; currentRow < c_line; currentRow++)
     {
       file >> data_indoor[currentRow].item_row >> data_indoor[currentRow].name_item
@@ -337,8 +308,9 @@ void MainWindow::on_load_pb_indoor_clicked()
         >> data_indoor[currentRow].s_low >> data_indoor[currentRow].s_high
         >> data_indoor[currentRow].v_low >> data_indoor[currentRow].v_high;
 
-      Qname_item_indoor[c_set] = QString::fromStdString(data_indoor[currentRow].name_item);
-      ui->listWidget_indoor->addItem(Qname_item_indoor[c_set]);
+      name_item_indoor = QString::fromStdString(data_indoor[currentRow].name_item);
+
+      ui->listWidget_indoor->addItem(name_item_indoor);
       ui->h_low_s_indoor->setValue(data_indoor[currentRow].h_low);
       ui->h_high_s_indoor->setValue(data_indoor[currentRow].h_high);
       ui->s_low_s_indoor->setValue(data_indoor[currentRow].s_low);
@@ -422,18 +394,16 @@ void MainWindow::Thread::run()
     org_img = original;
     if (thershold)
     {
-
       cvtColor(org_img, hsv_img, CV_BGR2HSV); //Convert the captured frame from BGR to HSV
       inRange(hsv_img, Scalar(data_indoor[currentRow].h_low, data_indoor[currentRow].s_low, data_indoor[currentRow].v_low),
         Scalar(data_indoor[currentRow].h_high, data_indoor[currentRow].s_high, data_indoor[currentRow].v_high), thr_img1); //Threshold the image
 
       if (!rviz)
         imshow("Outdoor Shape", thr_img1);
-
     }
     else
     {
-      hsv_thresholding(org_img, thr_img, &set_data_indoor[c_set]);
+      hsv_thresholding(org_img, thr_img, data_indoor[currentRow]);
 
       if (triangle)
         polygon.getTriangle().recognize(org_img, thr_img);
@@ -462,8 +432,8 @@ void MainWindow::Thread::run()
       if (!rviz)
         imshow("Outdoor Shape", org_img);
     }
-    Cvptr.image = org_img;
 
+    Cvptr.image = org_img;
     if (rviz)
     {
       image_pub_.publish(Cvptr.toImageMsg());
@@ -475,7 +445,6 @@ void MainWindow::Thread::run()
       close_ = 0;
       destroyAllWindows();
       break;
-
     }
   }
 }
