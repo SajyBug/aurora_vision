@@ -1,15 +1,6 @@
 #include "filter.h"
 #include "mainwindow.h"
 
-
-int iLowH = 82;
-int iHighH = 179;
-int iLowS = 108;
-int iHighS = 255;
-int iLowV = 0;
-int iHighV = 255;
-
-
 Mat hsv_img;
 
 void morphology(Mat& img)
