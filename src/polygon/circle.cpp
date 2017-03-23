@@ -21,7 +21,7 @@ void Circle::recognize(Mat &org_img, Mat thr_img)
   // Draw the circles detected
   for (i = 0; i < circles.size(); i++)
   {
-    detect();
+    //    detect();
     // circle center
     circle(org_img, center, 3, Scalar(0, 255, 0), -1, 8, 0);
     // circle outline
