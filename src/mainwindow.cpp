@@ -154,7 +154,7 @@ void MainWindow::imageCb(const sensor_msgs::ImageConstPtr& msg)
     return;
   }
   original = cv_ptr->image;
-//  cv::imshow("original", original);
+  //  cv::imshow("original", original);
   cv::waitKey(3);
 
 }
@@ -359,31 +359,37 @@ void MainWindow::on_load_pb_indoor_clicked()
 void MainWindow::on_h_low_s_indoor_valueChanged(int value)
 {
   data_indoor[currentRow].h_low = value;
+  ui->h_low_value->setText(QString::number(value));
 }
 
 void MainWindow::on_h_high_s_indoor_valueChanged(int value)
 {
   data_indoor[currentRow].h_high = value;
+  ui->h_high_value->setText(QString::number(value));
 }
 
 void MainWindow::on_s_low_s_indoor_valueChanged(int value)
 {
   data_indoor[currentRow].s_low = value;
+  ui->s_low_value->setText(QString::number(value));
 }
 
 void MainWindow::on_s_high_s_indoor_valueChanged(int value)
 {
   data_indoor[currentRow].s_high = value;
+  ui->s_high_value->setText(QString::number(value));
 }
 
 void MainWindow::on_v_low_s_indoor_valueChanged(int value)
 {
   data_indoor[currentRow].v_low = value;
+  ui->v_low_value->setText(QString::number(value));
 }
 
 void MainWindow::on_v_high_s_indoor_valueChanged(int value)
 {
   data_indoor[currentRow].v_high = value;
+  ui->v_high_value->setText(QString::number(value));
 }
 
 void MainWindow::on_pre_cb_indoor_clicked()
