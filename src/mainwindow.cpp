@@ -40,11 +40,9 @@ MainWindow::MainWindow(QWidget *parent) :
   it_(nh_)
 {
   ui->setupUi(this);
-
-  QWidget::setFixedSize(610, 550);
-
+  
   polygon = Polygon();
-
+  
   QPixmap logo(logo_addres);
   ui->logo_lable->setPixmap(logo);
   ui->data_Adrs_lineEdit->setText(indoor_file);
