@@ -14,11 +14,10 @@ void morphology(Mat& img)
   erode(img, img, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
 }
 
-void hsv_thresholding(Mat& org_img, Mat& thr_img, set_on *set)
+void hsv_thresholding(Mat& org_img, Mat& thr_img, set_on set)
 {
-
   cvtColor(org_img, hsv_img, CV_BGR2HSV); //Convert the captured frame from BGR to HSV
-  inRange(hsv_img, Scalar(set->h_low, set->s_low, set->v_low), Scalar(set->h_high, set->s_high, set->v_high), thr_img); //Threshold the image
+  inRange(hsv_img, Scalar(set.h_low, set.s_low, set.v_low), Scalar(set.h_high, set.s_high, set.v_high), thr_img); //Threshold the image
 }
 
 double angle(Point pt1, Point pt2, Point pt0)

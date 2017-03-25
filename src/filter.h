@@ -10,7 +10,7 @@
 using namespace std;
 using namespace cv;
 void morphology(Mat& img);
-void hsv_thresholding(Mat& org_img, Mat& thr_img, set_on *set);
+void hsv_thresholding(Mat& org_img, Mat& thr_img, set_on set);
 double angle(Point pt1, Point pt2, Point pt0);
 
 
