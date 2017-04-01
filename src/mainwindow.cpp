@@ -1,3 +1,13 @@
+/* 
+ * @File:     mainwindow.cpp
+ * @Author:   Sajjad Rahnama , Hossein Hojat Ansari
+ * 
+ * @Project:  Aurora
+ * @Version:  1.0 - Iran Open 2017
+ * 
+ * @Created  2016
+ */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <opencv2/opencv.hpp>
@@ -44,7 +54,7 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->data_Adrs_lineEdit->setText(indoor_file);
   ui->lineEdit_indoor->setPlaceholderText("Item Name"); //line edit plac
 
-  image_sub_ = it_.subscribe("/ardrone/bottom/image_raw", 1, &MainWindow::imageCb, this);
+  image_sub_ = it_.subscribe("/raspberry_pi/image_raw", 1, &MainWindow::imageCb, this);
   image_pub_ = it_.advertise("/vision/image", 1);
   connect(ui->triangle_cb, SIGNAL(stateChanged(int)), this, SLOT(traingle_cb(int)));
   connect(ui->square_cb, SIGNAL(stateChanged(int)), this, SLOT(square_cb(int)));

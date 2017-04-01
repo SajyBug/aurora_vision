@@ -1,3 +1,13 @@
+/* 
+ * @File:     h_shape.cpp
+ * @Author:   Sajjad Rahnama , Hossein Hojat Ansari
+ * 
+ * @Project:  Aurora
+ * @Version:  1.0 - Iran Open 2017
+ * 
+ * @Created  2016
+ */
+
 #include "h_shape.h"
 
 H_shape::H_shape()

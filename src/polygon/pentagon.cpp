@@ -1,8 +1,18 @@
+/* 
+ * @File:     pentagon.cpp
+ * @Author:   Sajjad Rahnama , Hossein Hojat Ansari
+ * 
+ * @Project:  Aurora
+ * @Version:  1.0 - Iran Open 2017
+ * 
+ * @Created  2016
+ */
+
 #include "pentagon.h"
 
 Pentagon::Pentagon()
 {
-  row = col = i = 0;
+  row = col = 0;
   contours.clear();
   approx.clear();
 
@@ -13,17 +23,11 @@ void Pentagon::recognize(Mat &org_img, Mat thr_img)
 
   //find contours
   findContours(thr_img, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
-  for (i = 0; i < contours.size(); i++)
+  for (unsigned int i = 0; i < contours.size(); i++)
   {
     //Approximates a polygonal curve(s) with the specified precision.
     approxPolyDP(Mat(contours[i]), approx, arcLength(Mat(contours[i]), true)*0.02, true);
 
-    // draw rectangle
-    //        if( approx.size() == 5 && isContourConvex(Mat(approx)) && std::fabs(contourArea(Mat(approx))) > 1000)
-    //        {
-    //            detect();
-    //            drawing(org_img, contours, i);
-    //        }
     if (approx.size() == 5 && fabs(contourArea(Mat(approx))) > 100)
     {
       double maxCosine1 = 0;
@@ -70,10 +74,10 @@ void Pentagon::recognize(Mat &org_img, Mat thr_img)
 void Pentagon::detect()
 {
   // compute all moments (center contours)
-  Moments mom = moments(Mat(contours[i]));
-  row = (int) (mom.m10 / mom.m00);
-  col = (int) (mom.m01 / mom.m00);
-  cout << "Cols Pentagon: " << row << "  ,  " << "Rows Pentagon: " << col << endl;
+  //  Moments mom = moments(Mat(contours[i]));
+  //  row = (int) (mom.m10 / mom.m00);
+  //  col = (int) (mom.m01 / mom.m00);
+  //  cout << "Cols Pentagon: " << row << "  ,  " << "Rows Pentagon: " << col << endl;
 }
 
 void Pentagon::drawing(Mat &org_img, vector <vector <Point> > &contours, int i)

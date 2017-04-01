@@ -1,3 +1,13 @@
+/* 
+ * @File:     circle.cpp
+ * @Author:   Sajjad Rahnama , Hossein Hojat Ansari
+ * 
+ * @Project:  Aurora
+ * @Version:  1.0 - Iran Open 2017
+ * 
+ * @Created  2016
+ */
+
 #include "circle.h"
 
 Circle::Circle()
@@ -12,28 +22,25 @@ void Circle::recognize(Mat &org_img, Mat thr_img)
   // Reduce the noise so we avoid false circle detection
   GaussianBlur(thr_img, output, Size(3, 3), 2, 2);
 
-
   morphology(output);
 
   // Apply the Hough Transform to find the circles
   HoughCircles(output, circles, CV_HOUGH_GRADIENT, 1, output.rows / 4, 20, 20, 10, 50);
 
   // Draw the circles detected
-  for (i = 0; i < circles.size(); i++)
+  for (unsigned int i = 0; i < circles.size(); i++)
   {
-    //    detect();
+    center = Point(cvRound(circles[0][0]), cvRound(circles[0][1]));
+    radius = cvRound(circles[0][2]);
     // circle center
     circle(org_img, center, 3, Scalar(0, 255, 0), -1, 8, 0);
     // circle outline
     circle(org_img, center, radius, Scalar(185, 192, 33), 3, 8, 0);
-
   }
 
 }
 
 void Circle::detect()
 {
-  center = Point(cvRound(circles[i][0]), cvRound(circles[i][1]));
-  radius = cvRound(circles[i][2]);
-  cout << center << endl;
+  //  cout << center << endl;
 }

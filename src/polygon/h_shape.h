@@ -1,3 +1,13 @@
+/* 
+ * @File:     h_shape.h
+ * @Author:   Sajjad Rahnama , Hossein Hojat Ansari
+ * 
+ * @Project:  Aurora
+ * @Version:  1.0 - Iran Open 2017
+ * 
+ * @Created  2016
+ */
+
 #ifndef H_SHAPE_H
 #define H_SHAPE_H
 

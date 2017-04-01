@@ -1,3 +1,13 @@
+/* 
+ * @File:     star.h
+ * @Author:   Sajjad Rahnama , Hossein Hojat Ansari
+ * 
+ * @Project:  Aurora
+ * @Version:  1.0 - Iran Open 2017
+ * 
+ * @Created  2016
+ */
+
 #ifndef STAR_H
 #define STAR_H
 
@@ -11,7 +21,6 @@ using namespace cv;
 
 class Star {
     int row, col;
-    unsigned int i;
     vector <vector <Point> > contours;
     vector <Point> approx;
     std::vector<std::vector<cv::Point> > star;

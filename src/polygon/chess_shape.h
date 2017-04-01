@@ -1,3 +1,13 @@
+/* 
+ * @File:     chess_shape.h
+ * @Author:   Sajjad Rahnama , Hossein Hojat Ansari
+ * 
+ * @Project:  Aurora
+ * @Version:  1.0 - Iran Open 2017
+ * 
+ * @Created  2016
+ */
+
 #ifndef CHESS_SHAPE_H
 #define CHESS_SHAPE_H
 

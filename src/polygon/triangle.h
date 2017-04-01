@@ -1,3 +1,13 @@
+/* 
+ * @File:     triangle.h
+ * @Author:   Sajjad Rahnama , Hossein Hojat Ansari
+ * 
+ * @Project:  Aurora
+ * @Version:  1.0 - Iran Open 2017
+ * 
+ * @Created  2016
+ */
+
 #ifndef TRIANGLE_H
 #define TRIANGLE_H
 
@@ -12,7 +22,6 @@ using namespace cv;
 class Triangle {
 private:
     int row, col;
-    unsigned int i;
     vector <vector <Point> > contours;
     vector <Point> approx;
     vector<vector<Point> > triangle;

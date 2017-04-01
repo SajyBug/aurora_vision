@@ -1,3 +1,13 @@
+/* 
+ * @File:     polygon.h
+ * @Author:   Sajjad Rahnama , Hossein Hojat Ansari
+ * 
+ * @Project:  Aurora
+ * @Version:  1.0 - Iran Open 2017
+ * 
+ * @Created  2016
+ */
+
 #ifndef POLYGON_H
 #define POLYGON_H
 

@@ -1,3 +1,13 @@
+/* 
+ * @File:     triangle.cpp
+ * @Author:   Sajjad Rahnama , Hossein Hojat Ansari
+ * 
+ * @Project:  Aurora
+ * @Version:  1.0 - Iran Open 2017
+ * 
+ * @Created  2016
+ */
+
 #include "triangle.h"
 
 Triangle::Triangle()
@@ -21,7 +31,7 @@ void Triangle::recognize(Mat &org_img, Mat thr_img)
   Canny(output, edge, 140, 255);
 
   findContours(edge, contours, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
-  for (i = 0; i < contours.size(); i++)
+  for (unsigned int i = 0; i < contours.size(); i++)
   {
     //Approximates a polygonal curve(s) with the specified precision.
     approxPolyDP(cv::Mat(contours[i]), approx, cv::arcLength(cv::Mat(contours[i]), true)*0.02, true);
@@ -58,7 +68,7 @@ void Triangle::recognize(Mat &org_img, Mat thr_img)
     const Point* p1 = &triangle[i][0];
     int n = (int) triangle[i].size();
     polylines(org_img, &p1, &n, 1, true, Scalar(0, 255, 0), 3, CV_AA);
-    putText(org_img, "Blue Triangle", Point(10, 40), FONT_ITALIC, 1, cv::Scalar(212, 157, 34), 2);
+    //    putText(org_img, "Blue Triangle", Point(10, 40), FONT_ITALIC, 1, cv::Scalar(212, 157, 34), 2);
   }
   contours.clear();
   approx.clear();
@@ -68,10 +78,10 @@ void Triangle::recognize(Mat &org_img, Mat thr_img)
 void Triangle::detect()
 {
   // compute all moments (center contours)
-  Moments mom = moments(Mat(contours[i]));
-  row = (int) (mom.m10 / mom.m00);
-  col = (int) (mom.m01 / mom.m00);
-  cout << "Cols Triangle: " << row << "  ,  " << "Rows Triangle: " << col << endl;
+  //  Moments mom = moments(Mat(contours[i]));
+  //  row = (int) (mom.m10 / mom.m00);
+  //  col = (int) (mom.m01 / mom.m00);
+  //  cout << "Cols Triangle: " << row << "  ,  " << "Rows Triangle: " << col << endl;
 }
 
 void Triangle::drawing(Mat &org_img, vector <vector <Point> > &contours, int i)
