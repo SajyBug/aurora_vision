@@ -29,6 +29,7 @@ Mat original;
 bool thershold = false;
 Polygon polygon;
 image_transport::Publisher image_pub_;
+aurora_vision::heart heart_msg;
 
 bool triangle = false;
 bool square = false;
@@ -39,6 +40,7 @@ bool heart = false;
 bool chess_shape1 = false;
 bool outdoor = false;
 bool rviz = false;
+bool heart_detect = false;
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
@@ -75,7 +77,6 @@ MainWindow::MainWindow(QWidget *parent) :
   data_indoor[0].v_low = 0;
   data_indoor[0].v_high = 255;
   data_indoor[0].item_row = 0;
-
 }
 
 void MainWindow::traingle_cb(int a)
@@ -394,6 +395,11 @@ void MainWindow::on_close_cam_indoor_clicked()
     close_ = 0;
 }
 
+MainWindow::Thread::Thread()
+{
+  heart_pub = nh2_.advertise<aurora_vision::heart>("heart", 10);
+}
+
 void MainWindow::Thread::run()
 {
   Mat org_img, thr_img, thr_img1, hsv_img;
@@ -431,7 +437,13 @@ void MainWindow::Thread::run()
         polygon.getStar().recognize(org_img, thr_img);
 
       if (heart)
-        polygon.getHeart().recognize(org_img);
+      {
+        aurora_vision::heart tmp_heart_msg;
+        tmp_heart_msg = polygon.getHeart().recognize(org_img);
+        heart_msg = tmp_heart_msg;
+        if (tmp_heart_msg.X > 1)
+          heart_pub.publish(heart_msg);
+      }
 
       if (chess_shape1)
         polygon.getChess_shape().recognize(org_img);

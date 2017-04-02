@@ -23,6 +23,7 @@
 #include <cv_bridge/cv_bridge.h>
 #include <sensor_msgs/image_encodings.h>
 #include <QThread>
+#include <aurora_vision/heart.h>
 
 
 using namespace std;
@@ -42,7 +43,11 @@ public:
 
     class Thread : public QThread {
     public:
+        Thread();
         void run();
+    private:
+        ros::NodeHandle nh2_;
+        ros::Publisher heart_pub;
     };
 
 private slots:

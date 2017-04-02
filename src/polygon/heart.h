@@ -14,7 +14,9 @@
 #include <iostream>
 #include <vector>
 #include <opencv2/opencv.hpp>
+#include "ros/ros.h"
 #include "../filter.h"
+#include <aurora_vision/heart.h>
 
 using namespace std;
 using namespace cv;
@@ -22,7 +24,7 @@ using namespace cv;
 class Heart {
 public:
     Heart();
-    void recognize(Mat &org_img);
+    aurora_vision::heart recognize(Mat &org_img);
 
 private:
     int row, col;
@@ -31,7 +33,7 @@ private:
     CascadeClassifier heart_cascade;
     String cascade = "/home/sajjadtest/catkin_aurora_vision/src/aurora_vision/src/heart.xml";
     void drawing(Mat &org_img);
-    void detect();
+    void detect(); 
 };
 
 #endif // HEART

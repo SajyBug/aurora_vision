@@ -8,16 +8,23 @@ find_package(catkin REQUIRED COMPONENTS
   image_transport
   sensor_msgs
   std_msgs
+  message_generation
 )
 
+add_message_files(
+   FILES
+   heart.msg
+)
+
+generate_messages(
+   DEPENDENCIES
+   std_msgs
+ )
 
 #include_directories(${catkin_INCLUDE_DIRS})
-catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES vision_opencv
-#  CATKIN_DEPENDS cv_bridge image roscpp sensor_msgs std_msgs
-#  DEPENDS system_lib
-)
+
+catkin_package(CATKIN_DEPENDS sensor_msgs message_runtime)
+
 # ---------------------------- GUI --------------------------------------------------
 # set header ans source files
 set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
