@@ -18,7 +18,7 @@ Star::Star()
 
 }
 
-void Star::recognize(Mat &org_img, Mat thr_img)
+bool Star::recognize(Mat &org_img, Mat thr_img)
 {
 
   //find contours
@@ -90,10 +90,15 @@ void Star::recognize(Mat &org_img, Mat thr_img)
     int n = (int) star[i].size();
     polylines(org_img, &p1, &n, 1, true, Scalar(0, 255, 0), 3, CV_AA);
     //    putText(org_img, "Blue Star", Point(10, 40), FONT_ITALIC, 1, cv::Scalar(212, 157, 34), 2);
+    contours.clear();
+    approx.clear();
+    star.clear();
+    return true;
   }
   contours.clear();
   approx.clear();
   star.clear();
+  return false;
 }
 
 void Star::detect()

@@ -398,6 +398,7 @@ void MainWindow::on_close_cam_indoor_clicked()
 MainWindow::Thread::Thread()
 {
   heart_pub = nh2_.advertise<aurora_vision::heart>("heart", 10);
+  shapes_pub = nh2_.advertise < std_msgs::String > ("shapes", 10);
 }
 
 void MainWindow::Thread::run()
@@ -422,27 +423,75 @@ void MainWindow::Thread::run()
       hsv_thresholding(org_img, thr_img, data_indoor[currentRow]);
 
       if (triangle)
-        polygon.getTriangle().recognize(org_img, thr_img);
+      {
+        std_msgs::String tmp_string;
+        bool tmp_bool;
+        tmp_bool = polygon.getTriangle().recognize(org_img, thr_img);
+        if (tmp_bool)
+        {
+          tmp_string.data = "triangle";
+          shapes_pub.publish(tmp_string);
+        }
+      }
 
       if (square)
-        polygon.getSquare().recognize(org_img, thr_img);
+      {
+        std_msgs::String tmp_string;
+        bool tmp_bool;
+        tmp_bool = polygon.getSquare().recognize(org_img, thr_img);
+        if (tmp_bool)
+        {
+          tmp_string.data = "square";
+          shapes_pub.publish(tmp_string);
+        }
+      }
 
       if (circle1)
-        polygon.getCircle().recognize(org_img, thr_img);
-
+      {
+        std_msgs::String tmp_string;
+        bool tmp_bool;
+        tmp_bool = polygon.getCircle().recognize(org_img, thr_img);
+        if (tmp_bool)
+        {
+          tmp_string.data = "circle";
+          shapes_pub.publish(tmp_string);
+        }
+      }
       if (pentagon)
-        polygon.getPentagon().recognize(org_img, thr_img);
-
+      {
+        std_msgs::String tmp_string;
+        bool tmp_bool;
+        tmp_bool = polygon.getPentagon().recognize(org_img, thr_img);
+        if (tmp_bool)
+        {
+          tmp_string.data = "pentagon";
+          shapes_pub.publish(tmp_string);
+        }
+      }
       if (star)
-        polygon.getStar().recognize(org_img, thr_img);
-
+      {
+        std_msgs::String tmp_string;
+        bool tmp_bool;
+        tmp_bool = polygon.getStar().recognize(org_img, thr_img);
+        if (tmp_bool)
+        {
+          tmp_string.data = "star";
+          shapes_pub.publish(tmp_string);
+        }
+      }
       if (heart)
       {
+        std_msgs::String tmp_string;
+        tmp_string.data = "heart";
         aurora_vision::heart tmp_heart_msg;
         tmp_heart_msg = polygon.getHeart().recognize(org_img);
         heart_msg = tmp_heart_msg;
         if (tmp_heart_msg.X > 1)
+        {
+          shapes_pub.publish(tmp_string);
           heart_pub.publish(heart_msg);
+        }
+
       }
 
       if (chess_shape1)

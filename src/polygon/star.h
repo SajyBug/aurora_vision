@@ -29,7 +29,7 @@ class Star {
 
 public:
     Star();
-    void recognize(Mat &org_img, Mat thr_img);
+    bool recognize(Mat &org_img, Mat thr_img);
 };
 
 #endif // STAR_H

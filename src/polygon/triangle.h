@@ -30,7 +30,7 @@ private:
 
 public:
     Triangle();
-    void recognize(Mat &org_img, Mat thr_img);
+    bool recognize(Mat &org_img, Mat thr_img);
 };
 
 #endif // TRIANGLE_H

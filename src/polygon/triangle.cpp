@@ -17,7 +17,7 @@ Triangle::Triangle()
   approx.clear();
 }
 
-void Triangle::recognize(Mat &org_img, Mat thr_img)
+bool Triangle::recognize(Mat &org_img, Mat thr_img)
 {
   Mat output, edge;
 
@@ -69,10 +69,15 @@ void Triangle::recognize(Mat &org_img, Mat thr_img)
     int n = (int) triangle[i].size();
     polylines(org_img, &p1, &n, 1, true, Scalar(0, 255, 0), 3, CV_AA);
     //    putText(org_img, "Blue Triangle", Point(10, 40), FONT_ITALIC, 1, cv::Scalar(212, 157, 34), 2);
+    contours.clear();
+    approx.clear();
+    triangle.clear();
+    return true;
   }
   contours.clear();
   approx.clear();
   triangle.clear();
+  return false;
 }
 
 void Triangle::detect()

@@ -26,7 +26,7 @@ class Circle {
 
 public:
     Circle();
-    void recognize(Mat &org_img, Mat thr_img);
+    bool recognize(Mat &org_img, Mat thr_img);
     void detect();
 };
 #endif // CIRCLE_H

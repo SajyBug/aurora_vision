@@ -18,9 +18,8 @@ Pentagon::Pentagon()
 
 }
 
-void Pentagon::recognize(Mat &org_img, Mat thr_img)
+bool Pentagon::recognize(Mat &org_img, Mat thr_img)
 {
-
   //find contours
   findContours(thr_img, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
   for (unsigned int i = 0; i < contours.size(); i++)
@@ -64,11 +63,16 @@ void Pentagon::recognize(Mat &org_img, Mat thr_img)
     const Point* p1 = &pentagon[i][0];
     int n = (int) pentagon[i].size();
     polylines(org_img, &p1, &n, 1, true, Scalar(0, 255, 0), 3, CV_AA);
-    putText(org_img, "Blue Pentagon", Point(10, 40), FONT_ITALIC, 1, cv::Scalar(212, 157, 34), 2);
+    //    putText(org_img, "Blue Pentagon", Point(10, 40), FONT_ITALIC, 1, cv::Scalar(212, 157, 34), 2);
+    contours.clear();
+    approx.clear();
+    pentagon.clear();
+    return true;
   }
   contours.clear();
   approx.clear();
   pentagon.clear();
+  return false;
 }
 
 void Pentagon::detect()

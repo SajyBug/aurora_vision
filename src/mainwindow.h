@@ -24,6 +24,7 @@
 #include <sensor_msgs/image_encodings.h>
 #include <QThread>
 #include <aurora_vision/heart.h>
+#include <std_msgs/String.h>
 
 
 using namespace std;
@@ -48,6 +49,7 @@ public:
     private:
         ros::NodeHandle nh2_;
         ros::Publisher heart_pub;
+        ros::Publisher shapes_pub;
     };
 
 private slots:

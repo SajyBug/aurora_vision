@@ -18,7 +18,7 @@ Square::Square()
 
 }
 
-void Square::recognize(Mat &org_img, Mat thr_img)
+bool Square::recognize(Mat &org_img, Mat thr_img)
 {
   Mat output;
   //medianblure filter for attenuation
@@ -49,10 +49,15 @@ void Square::recognize(Mat &org_img, Mat thr_img)
     int n = (int) square[i].size();
     polylines(org_img, &p1, &n, 1, true, Scalar(0, 255, 0), 3, CV_AA);
     //    putText(org_img, "Blue Square", Point(10, 40), FONT_ITALIC, 1, cv::Scalar(212, 157, 34), 2);
+    contours.clear();
+    approx.clear();
+    square.clear();
+    return true;
   }
   contours.clear();
   approx.clear();
   square.clear();
+  return false;
 }
 
 void Square::detect()

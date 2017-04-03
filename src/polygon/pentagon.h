@@ -29,7 +29,7 @@ class Pentagon {
 
 public:
     Pentagon();
-    void recognize(Mat &org_img, Mat thr_img);
+    bool recognize(Mat &org_img, Mat thr_img);
 };
 
 #endif // PENTAGON_H

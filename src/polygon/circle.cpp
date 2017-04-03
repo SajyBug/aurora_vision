@@ -16,7 +16,7 @@ Circle::Circle()
   center = Point(0, 0);
 }
 
-void Circle::recognize(Mat &org_img, Mat thr_img)
+bool Circle::recognize(Mat &org_img, Mat thr_img)
 {
   Mat output;
   // Reduce the noise so we avoid false circle detection
@@ -36,8 +36,9 @@ void Circle::recognize(Mat &org_img, Mat thr_img)
     circle(org_img, center, 3, Scalar(0, 255, 0), -1, 8, 0);
     // circle outline
     circle(org_img, center, radius, Scalar(185, 192, 33), 3, 8, 0);
+    return true;
   }
-
+  return false;
 }
 
 void Circle::detect()
