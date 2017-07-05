@@ -79,4 +79,4 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR} ${catkin_INCLUDE_DIRS} ${OpenCV_
 # build!
 add_executable(aurora_vision ${GUI_SOURCE_FILES} ${GUI_RESOURCE_FILES_CPP} ${GUI_UI_FILES_HPP} ${GUI_HEADER_FILES_HPP} ${GUI_RESOURCE_FILES})
 target_link_libraries(aurora_vision ${catkin_LIBRARIES} ${QT_LIBRARIES} ${ROS_LIBRARIES} ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
-
+add_dependencies(aurora_vision ${PROJECT_NAME}_gencpp)
